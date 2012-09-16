@@ -11,12 +11,12 @@
  	*/
 
 	if (!empty($vars['subtype'])) {
-		$subtype = "&subtype=" . urlencode($vars['subtype']);
+		$subtype = "&entity_subtype=" . urlencode($vars['subtype']);
 	} else {
 		$subtype = "";
 	}
 	if (!empty($vars['object'])) {
-		$object = "&object=" . urlencode($vars['object']);
+		$object = "&entity_type=" . urlencode($vars['object']);
 	} else {
 		$object = "";
 	}
@@ -125,8 +125,9 @@
             	
             	$item = new StdClass();
 		$item_url =  $vars['url'] . "search?q=". urlencode(utf8_encode($tag->tag));
+		
 		if ($vars['subtype'])
-		  $item_url .=  urlencode(utf8_encode("&search_type=tags" . $vars['subtype']));
+		  $item_url .=  urlencode(utf8_encode($subtype . $object . "&search_type=tags"));
 		$item->url = $item_url;
             	$item->style = $style; 
             	$item->title = htmlentities($tag->tag, ENT_QUOTES, 'UTF-8');

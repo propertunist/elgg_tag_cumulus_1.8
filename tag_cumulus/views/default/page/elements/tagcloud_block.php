@@ -43,47 +43,53 @@ if ($owner_guid != ''){
 	$title .= $owner_entity->name . "'s ";	
 }
 
-$tag_types = array("blog", "videos", "bookmarks", "pages", "photos", "event", "file");
+$tag_types = array("blog", "videos", "bookmarks", "pages", "photos", "event", "file", "videolist");
 if (in_array($context, $tag_types)){
 	switch ($context) {
     	case 'pages':
-        	$title .= 'wiki page';
+        	$title .= elgg_echo ('tag_cumulus:page');
 			$options['subtype'] = 'page_top';
         	break;
     	case 'videos':
-        	$title .= 'video';
+        	$title .= elgg_echo ('tag_cumulus:video');
 			$options['subtype'] = GLOBAL_IZAP_VIDEOS_SUBTYPE;
         	break;
 		case 'photos':
-			$title .= 'photo';
+			$title .= elgg_echo ('image');
 			$options['subtype'] = 'image';
 			break;
-    	case 'groups':
-        	$title .= 'group';
-        	break;
     	case 'file':
-        	$title .= 'file';
+        	$title .= elgg_echo ('file:file');
         	break;
 		case 'event_calendar':
-			$title .= 'event';
+			$title .= elgg_echo ('event');
 			break;
     	case 'blog':
-        	$title .= 'blog';
+        	$title .= elgg_echo ('blog:blog');
         	break;
 		case 'bookmarks':
-			$title .= 'bookmark';
+			$title .= elgg_echo ('tag_culumus:bookmark');
+			break;
+		case 'videolist':
+			$title .= elgg_echo ('tag_cumulus:video');
 			break;
 	}
 	$title .= " ";
 	$title .= elgg_echo ('tag_cumulus:tags');
 }
 else {
-	$title .= elgg_echo('tag_cumulus:default-tag-header');
+	if ($owner_guid != ''){
+	$title .= 'tags';	
+	}
+	else{
+		$title .= elgg_echo('tag_cumulus:default-tag-header');
+	}
 }
 
 //if (is_array($options['subtype']) && count($options['subtype']) > 1) {
 	// we cannot provide links to tagged objects with multiple types
 //elgg_dump($options);
+
 $tag_data = elgg_get_tags($options);
 //elgg_dump ($tag_data);
 
