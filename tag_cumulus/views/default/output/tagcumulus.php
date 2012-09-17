@@ -5,10 +5,8 @@
 	 * 
 	 * @package tag_cumulus
 	 * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
-	 * @author Pedro Prez
-	 * @copyright 2009
-	 * @link http://www.pedroprez.com.ar/
- 	*/
+	 * @author Pedro Prez/ura soul
+	 */
 
 	if (!empty($vars['subtype'])) {
 		$subtype = "&entity_subtype=" . urlencode($vars['subtype']);
@@ -24,53 +22,80 @@
 	if (!empty($vars['speed']))
 		$speed = (int)$vars['speed'];
 	else
-		$speed = TAG_CUMULUS_SPEED;
+		{
+		$speed = get_plugin_setting('speed', 'tag_cumulus');
+		if ((($speed >= 25) && ($speed <= 500)) != TRUE)
+			$speed = TAG_CUMULUS_SPEED;
+		}
 		
-	if (!empty($vars['color_max']))
-		$color_max = $vars['color_max'];
+	if (!empty($vars['tcolor_max']))
+		$tcolor_max = $vars['tcolor_max'];
 	else
-		$color_max = TAG_CUMULUS_COLOR_MAX;
-		
+		{
+		$tcolor_max = get_plugin_setting('tcolor_max', 'tag_cumulus');
+		if ($tcolor_max =='')
+			$tcolor_max = TAG_CUMULUS_COLOR_MAX;
+		}
 	if (!empty($vars['hi_color_max']))
 		$hi_color_max = $vars['hi_color_max'];
 	else
-		$hi_color_max = TAG_CUMULUS_HI_COLOR_MAX;
-		
-		
+		{
+		$hi_color_max = get_plugin_setting('hi_color_max', 'tag_cumulus');
+		if ($hi_color_max =='')
+			$hi_color_max = TAG_CUMULUS_HI_COLOR_MAX;
+		}
+				
 	if (!empty($vars['tcolor']))
 		$tcolor = $vars['tcolor'];
 	else
-		$tcolor = TAG_CUMULUS_T_COLOR;
-
+		{
+		$tcolor = get_plugin_setting('tcolor', 'tag_cumulus');
+		if ($tcolor == '')
+			$tcolor = TAG_CUMULUS_T_COLOR;
+		}
 	if (!empty($vars['tcolor2']))
 		$tcolor2 = $vars['tcolor2'];
 	else
+		{
+		$tcolor2 = get_plugin_setting('tcolor2', 'tag_cumulus');
+		if ($tcolor2 =='')
 		$tcolor2 = TAG_CUMULUS_T_COLOR2;
-
+		}
 	if (!empty($vars['hicolor']))
 		$hicolor = $vars['hicolor'];
 	else
-		$hicolor = TAG_CUMULUS_HI_COLOR;	
+		{
+		$hicolor = get_plugin_setting('hi_color', 'tag_cumulus');
+		if ($hicolor == '')
+		$hicolor = TAG_CUMULUS_HI_COLOR;
+		}	
 	
 	if (!empty($vars['wmode']))
 		$wmode = $vars['wmode'];
 	else
+		{
+		$wmode = get_plugin_setting('wmode', 'tag_cumulus');
+		if ($wmode =='')
 		$wmode = TAG_CUMULUS_WMODE;
+		}
 
 	if (!empty($vars['width']))
 		$width = $vars['width'];
 	else
-		$width = TAG_CUMULUS_WIDTH;	
-		
-	if (!empty($vars['height']))
-		$height = $vars['height'];
-	else
-		$height = TAG_CUMULUS_HEIGHT;
+		{
+		$width = get_plugin_setting('default_width', 'tag_cumulus');
+		if ($width == '')
+		$width = TAG_CUMULUS_WIDTH;
+		}	
 
 	if (!empty($vars['background']))
 		$background = $vars['background'];
 	else
+		{
+		$background = get_plugin_setting('background_color', 'tag_cumulus');
+		if ($background='')
 		$background = TAG_CUMULUS_BACKGROUND;
+		}
 	
 	
 	if (empty($vars['tagcloud']) && !empty($vars['value']))
@@ -82,8 +107,7 @@
         $cloud = array();
         $max = 0;
         foreach($vars['tagcloud'] as $tag) {
-        	//elgg_dump("tag = " . $tag, 'true'); 
-        	if ($tag->total > $max) {
+           	if ($tag->total > $max) {
         		$max = $tag->total;
         	}
         }
@@ -156,30 +180,30 @@
 						$item_color =  "color='$tcolor2' hicolor='$hicolor'";
 					break;
 					case 16:
-						$item_color =  "color='$color_max' hicolor='$hi_color_max'";
+						$item_color =  "color='$tcolor_max' hicolor='$hi_color_max'";
 					break;
 					case 22:
-						$item_color =  "color='$color_max' hicolor='$hi_color_max'";
+						$item_color =  "color='$tcolor_max' hicolor='$hi_color_max'";
 					break;
 				}
          		$cumulus .= "<a href='{$item->url}' style='{$item->style}' {$item_color}>{$item->title}</a>";
         	}
         }
-        
      }
+
+$height = $width;
 ?>
 
 <div id="tag_cumulus"><div style="padding: 15px;">please ensure the web browser has the flash plugin and javascript enabled.</div></div>
 
 <script type="text/javascript">
 	
-	var so = new SWFObject("<?php echo $vars['url'] ?>/mod/tag_cumulus/vendors/tagcloud.swf", "tagcloud", "<?php echo $width; ?>", "<?php echo $height; ?>", "7", "<?php echo $background; ?>");
+	var so = new SWFObject("<?php echo $vars['url'] ?>/mod/tag_cumulus/vendors/tagcloud.swf", "tagcloud", "<?php echo $height; ?>", "<?php echo $width; ?>", "7", "<?php echo $background; ?>");
 
 	// uncomment next line to enable transparency
 	so.addParam("wmode", "<?php echo $wmode ?>");
 	so.addVariable("hicolor", "<?php echo $hicolor ?>");
 	so.addVariable("tcolor", "<?php echo $tcolor ?>");
-	so.addVariable("tcolor2", "<?php echo $tcolor2 ?>");
 	so.addVariable("mode", "tags");
 	so.addVariable("distr", "true");
 	so.addVariable("tspeed", "<?php echo $speed ?>");

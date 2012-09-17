@@ -23,24 +23,26 @@
 		Green: 0x00FF00
 		Yellow: 0xFFFF00
 	*/ 
- 		define('TAG_CUMULUS_COLOR_MAX','0xF11486');
- 		define('TAG_CUMULUS_HI_COLOR_MAX','0xFF6600');
- 		define('TAG_CUMULUS_T_COLOR','0xEEEEEE');
- 		define('TAG_CUMULUS_T_COLOR2','0x00ACD8');
- 		define('TAG_CUMULUS_HI_COLOR','0xFDA04E');
+ 		define('TAG_CUMULUS_COLOR_MAX','0x444444');
+ 		define('TAG_CUMULUS_HI_COLOR_MAX','0x000000');
+ 		define('TAG_CUMULUS_T_COLOR','0x555555');
+ 		define('TAG_CUMULUS_T_COLOR2','0x999999');
+ 		define('TAG_CUMULUS_HI_COLOR','0x222222');
  		define('TAG_CUMULUS_WMODE','transparent');
  	//This color must be hexadecimal code
- 		define('TAG_CUMULUS_BACKGROUND','#DEDEDE');
+ 		define('TAG_CUMULUS_BACKGROUND','#ffffff');
  		
  	
  	function tag_cumulus_init(){
 		elgg_extend_view('metatags','tag_cumulus/javascript');
-		$context = elgg_get_context();
-		$display_tags_here = array("videos", "pages", "photos", "events");
-		if (in_array($context, $display_tags_here)){
-		elgg_extend_view('page/elements/sidebar','page/elements/tagcloud_block');
-		} 
-		 
+		
+		if (get_plugin_setting('add_to_sidebar', 'tag_cumulus') == 'yes') {
+			$display_tags_here = array("videos", "photos", "events");
+			$context = elgg_get_context();
+			if (in_array($context, $display_tags_here)){
+				elgg_extend_view('page/elements/sidebar','page/elements/tagcloud_block');
+			} 
+		}
 	}
 	
 	//**BEGIN

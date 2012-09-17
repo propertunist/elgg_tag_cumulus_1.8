@@ -34,7 +34,7 @@ $options = array(
 	'threshold' => 0,
 	'limit' => elgg_extract('limit', $vars, 50),
 	'tag_name' => 'tags',
-	'width' => $width,
+	'width' => $vars['width'],
 );
 
 $title = '';
