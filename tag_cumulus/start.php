@@ -34,7 +34,7 @@
  		
  	
  	function tag_cumulus_init(){
-		elgg_extend_view('metatags','tag_cumulus/javascript');
+		elgg_extend_view('page/elements/head','tag_cumulus/javascript');
 		
 		if (get_plugin_setting('add_to_sidebar', 'tag_cumulus') == 'yes') {
 			$display_tags_here = array("videos", "photos", "events");

@@ -23,7 +23,7 @@
 		$speed = (int)$vars['speed'];
 	else
 		{
-		$speed = get_plugin_setting('speed', 'tag_cumulus');
+		$speed = elgg_get_plugin_setting('speed', 'tag_cumulus');
 		if ((($speed >= 25) && ($speed <= 500)) != TRUE)
 			$speed = TAG_CUMULUS_SPEED;
 		}
@@ -32,7 +32,7 @@
 		$tcolor_max = $vars['tcolor_max'];
 	else
 		{
-		$tcolor_max = get_plugin_setting('tcolor_max', 'tag_cumulus');
+		$tcolor_max = elgg_get_plugin_setting('tcolor_max', 'tag_cumulus');
 		if ($tcolor_max =='')
 			$tcolor_max = TAG_CUMULUS_COLOR_MAX;
 		}
@@ -40,7 +40,7 @@
 		$hi_color_max = $vars['hi_color_max'];
 	else
 		{
-		$hi_color_max = get_plugin_setting('hi_color_max', 'tag_cumulus');
+		$hi_color_max = elgg_get_plugin_setting('hi_color_max', 'tag_cumulus');
 		if ($hi_color_max =='')
 			$hi_color_max = TAG_CUMULUS_HI_COLOR_MAX;
 		}
@@ -49,7 +49,7 @@
 		$tcolor = $vars['tcolor'];
 	else
 		{
-		$tcolor = get_plugin_setting('tcolor', 'tag_cumulus');
+		$tcolor = elgg_get_plugin_setting('tcolor', 'tag_cumulus');
 		if ($tcolor == '')
 			$tcolor = TAG_CUMULUS_T_COLOR;
 		}
@@ -57,7 +57,7 @@
 		$tcolor2 = $vars['tcolor2'];
 	else
 		{
-		$tcolor2 = get_plugin_setting('tcolor2', 'tag_cumulus');
+		$tcolor2 = elgg_get_plugin_setting('tcolor2', 'tag_cumulus');
 		if ($tcolor2 =='')
 		$tcolor2 = TAG_CUMULUS_T_COLOR2;
 		}
@@ -65,7 +65,7 @@
 		$hicolor = $vars['hicolor'];
 	else
 		{
-		$hicolor = get_plugin_setting('hi_color', 'tag_cumulus');
+		$hicolor = elgg_get_plugin_setting('hi_color', 'tag_cumulus');
 		if ($hicolor == '')
 		$hicolor = TAG_CUMULUS_HI_COLOR;
 		}	
@@ -74,7 +74,7 @@
 		$wmode = $vars['wmode'];
 	else
 		{
-		$wmode = get_plugin_setting('wmode', 'tag_cumulus');
+		$wmode = elgg_get_plugin_setting('wmode', 'tag_cumulus');
 		if ($wmode =='')
 		$wmode = TAG_CUMULUS_WMODE;
 		}
@@ -83,7 +83,7 @@
 		$width = $vars['width'];
 	else
 		{
-		$width = get_plugin_setting('default_width', 'tag_cumulus');
+		$width = elgg_get_plugin_setting('default_width', 'tag_cumulus');
 		if ($width == '')
 		$width = TAG_CUMULUS_WIDTH;
 		}	
@@ -92,7 +92,7 @@
 		$background = $vars['background'];
 	else
 		{
-		$background = get_plugin_setting('background_color', 'tag_cumulus');
+		$background = elgg_get_plugin_setting('background_color', 'tag_cumulus');
 		if ($background='')
 		$background = TAG_CUMULUS_BACKGROUND;
 		}
