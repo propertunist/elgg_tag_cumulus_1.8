@@ -113,7 +113,15 @@
         }
        
         foreach($vars['tagcloud'] as $tag) {
-            $size = round((log($tag->total) / log($max)) * 100) + 30;
+        	$logmax = log($max);
+			$roundtag = round(log($tag->total));
+        	if (($logmax>0)&&($roundtag > 0)){
+        		$size = (($roundtag / $logmax) * 100) + 30;
+			}
+			else {
+				$size = 30;
+			}
+			
             if($size){
             	
             	switch($size)
@@ -151,7 +159,8 @@
 		$item_url =  $vars['url'] . "search?q=". urlencode(utf8_encode($tag->tag));
 		
 		if ($vars['subtype'])
-		  $item_url .=  urlencode(utf8_encode($subtype . $object . "&search_type=tags"));
+		  $item_url .=  urlencode(utf8_encode($subtype . $object));
+		$item_url .=  urlencode(utf8_encode("&search_type=tags"));
 		$item->url = $item_url;
             	$item->style = $style; 
             	$item->title = htmlentities($tag->tag, ENT_QUOTES, 'UTF-8');
